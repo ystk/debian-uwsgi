@@ -1,3 +1,11 @@
+uwsgi (2.0.7-1+deb8u1) jessie; urgency=medium
+
+  * Add patch cherry-picked upstream to fix compilation with recent
+    glibc.
+    Closes: Bug#854535. Thanks to Masahiro Yamada.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sun, 19 Feb 2017 22:17:18 +0100
+
 uwsgi (2.0.7-1) unstable; urgency=medium
 
   [ upstream ]
