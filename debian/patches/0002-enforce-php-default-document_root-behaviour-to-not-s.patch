@@ -1,0 +1,56 @@
+From: Unbit <info@unbit.it>
+Date: Sat, 17 Feb 2018 14:10:29 +0100
+Subject: enforce php default document_root behaviour, to not show external
+ files
+Origin: https://github.com/unbit/uwsgi/commit/0a480f435ea6feb63deb410ad2bf376ed3f05f8a
+Bug-Debian: https://bugs.debian.org/891639
+Bug-Debian-Security: https://security-tracker.debian.org/tracker/CVE-2018-7490
+
+---
+ plugins/php/php_plugin.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+--- a/plugins/php/php_plugin.c
++++ b/plugins/php/php_plugin.c
+@@ -16,6 +16,7 @@ struct uwsgi_php {
+ #endif
+ 	struct uwsgi_string_list *vars;
+ 	char *docroot;
++	size_t docroot_len;
+ 	char *app;
+ 	char *app_qs;
+ 	char *fallback;
+@@ -585,6 +586,8 @@ int uwsgi_php_init(void) {
+ 			uwsgi_log("unable to set php docroot to %s\n", orig_docroot);
+ 			exit(1);
+ 		}
++		uwsgi_log("PHP document root set to %s\n", uphp.docroot);
++		uphp.docroot_len = strlen(uphp.docroot);
+ 	}
+ 
+ 	if (uphp.sapi_name) {
+@@ -766,6 +769,7 @@ oldstyle:
+ 	free(filename);
+ 	real_filename_len = strlen(real_filename);
+ 
++	// first check for valid doc roots
+ 	if (uphp.allowed_docroot) {
+ 		struct uwsgi_string_list *usl = uphp.allowed_docroot;
+ 		while(usl) {
+@@ -778,6 +782,16 @@ oldstyle:
+ 		uwsgi_log("PHP security error: %s is not under an allowed docroot\n", real_filename);
+ 		return -1;
+ 	}
++	// then for default docroot (if any)
++	else if (uphp.docroot)
++	{
++		if (!uwsgi_starts_with(real_filename, real_filename_len, uphp.docroot, uphp.docroot_len)) {
++			goto secure;
++		}
++		uwsgi_403(wsgi_req);
++		uwsgi_log("PHP security error: %s is not under the default docroot\n", real_filename);
++		return -1;
++	}
+ 
+ secure:
+ 

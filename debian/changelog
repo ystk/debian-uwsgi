@@ -1,3 +1,13 @@
+uwsgi (2.0.7-1+deb8u2) jessie-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * Stack-based buffer overflow in uwsgi_expand_path function (CVE-2018-6758)
+    (Closes: #889753)
+  * enforce php default document_root behaviour, to not show external files
+    (CVE-2018-7490) (Closes: #891639)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 17 Mar 2018 09:37:01 +0100
+
 uwsgi (2.0.7-1+deb8u1) jessie; urgency=medium
 
   * Add patch cherry-picked upstream to fix compilation with recent

@@ -1,4 +1,6 @@
 020150415~f6e5db9.patch
+0001-improve-uwsgi_expand_path-to-sanitize-input-avoiding.patch
+0002-enforce-php-default-document_root-behaviour-to-not-s.patch
 1001_avoid_setting_RPATH.patch
 1002_fix-reload-process-name.patch
 1003_remove-php-libs.patch
