@@ -1,3 +1,10 @@
+uwsgi (2.0.7-1+deb8u3) jessie-security; urgency=medium
+
+  * Non-maintainer upload by the ELTS team.
+  * Error out on HTTP header larger than 16K (Fixes: CVE-2020-11984)
+
+ -- Utkarsh Gupta <utkarsh@debian.org>  Sun, 30 Aug 2020 00:18:29 +0530
+
 uwsgi (2.0.7-1+deb8u2) jessie-security; urgency=high
 
   * Non-maintainer upload by the Security Team.
