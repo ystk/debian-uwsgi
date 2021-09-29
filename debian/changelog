@@ -1,3 +1,11 @@
+uwsgi (2.0.7-1+deb8u4) jessie-security; urgency=high
+
+  * Non-maintainer upload by the ELTS Security Team.
+  * CVE-2021-36160: a carefully crafted request uri-path can cause
+    mod_proxy_uwsgi to read above the allocated memory and crash (DoS).
+
+ -- Sylvain Beucler <beuc@debian.org>  Sat, 25 Sep 2021 20:21:13 +0200
+
 uwsgi (2.0.7-1+deb8u3) jessie-security; urgency=medium
 
   * Non-maintainer upload by the ELTS team.
