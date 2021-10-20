@@ -9,3 +9,4 @@
 1007_fix_pty_on_hurd.patch
 CVE-2020-11984.patch
 CVE-2021-36160.patch
+CVE-2021-36160-2.patch
